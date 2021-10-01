@@ -1,2 +1,2 @@
 # Trotan
-Dungeon Crawler Game
+Java Dungeon Crawler Game
