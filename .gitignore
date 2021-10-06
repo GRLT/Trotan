@@ -1,0 +1,8 @@
+
+*.pyc
+*.idea
+*.txt
+
+Modules/
+docs.md
+out/
