@@ -2,7 +2,10 @@ package com.game.main;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.Serial;
+import java.nio.file.FileSystem;
 
 public class Game extends Canvas implements Runnable {
 
@@ -10,19 +13,23 @@ public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = -1L;
     private Thread thread;
     private boolean running = false;
-
     private Handler handler;
+    public static BufferedImage sprite_sheet;
 
-    public Game() {
-        new Window(WIDTH, HEIGHT, "Trotan", this);
 
+    public Game() throws IOException {
         handler = new Handler();
 
-        handler.addObject(new Player(100,100,ID.Player));
+        new Window(WIDTH, HEIGHT, "Trotan", this);
+        BufferedImageLoader loader = new BufferedImageLoader();
+        sprite_sheet = loader.loadImage("C:\\Code\\Projects\\Trotan\\assets\\tileSet.png");
+
+        handler.addObject(new Player(0,0,ID.Player));
+
     }
 
     public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 10;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new Game();
     }
 
