@@ -1,8 +1,12 @@
-
+*.gradle
 *.pyc
 *.idea
 *.txt
+*.bat
 
+gradlew
+gradle/
+.gradle/
+build/
 Modules/
-docs.md
 out/
