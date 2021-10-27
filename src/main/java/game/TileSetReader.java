@@ -4,6 +4,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 
+import javax.imageio.ImageIO;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -17,15 +19,15 @@ public class TileSetReader {
     }
 
 
-    public HashMap<Integer, WritableImage> Slicer(Image image) {
-        HashMap<Integer, WritableImage> slicedImages = new HashMap<>();
-
+    public HashMap<Integer, Image> Slicer(Image image) {
+        HashMap<Integer, Image> slicedImages = new HashMap<>();
         PixelReader secondReader = image.getPixelReader();
         int y = 0, x = 0, k = 0;
 
         for (int i = 0; i < 1024; i++) {
             WritableImage newImage = new WritableImage(secondReader, x, y, 16, 16);
-            slicedImages.put(k++, newImage);
+
+            slicedImages.put(k++, (Image) newImage);
             x += 17;
             if (x == 544) {
                 x = 0;
