@@ -1,11 +1,6 @@
-*.gradle
 *.pyc
 *.idea
 *.txt
-*.bat
-
-gradlew
-gradle/
 .gradle/
 Modules/
 out/
