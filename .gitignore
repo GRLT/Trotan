@@ -1,6 +1,5 @@
 *.pyc
 *.idea
-*.txt
 .gradle/
 Modules/
 out/
