@@ -1,4 +1,7 @@
-package game;
+package world;
+
+import entity.Enemy;
+import util.GroupedTileSet;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -42,13 +45,14 @@ public class WorldGenerator {
                     }
                     case 'p' -> {
                         currentWorld.getWorldTiles()[row][col].setHasPlayer(true);
-                        currentWorld.player.setPosX(row);
-                        currentWorld.player.setPosY(col);
+                        currentWorld.player.currentTile = currentWorld.getWorldTiles()[row][col];
 
                     }
                     case 'e' -> {
-                        currentWorld.getWorldTiles()[row][col].setTileID(GroupedTileSet.getRandomEnemySprite());
-                        currentWorld.getWorldTiles()[row][col].setHasEnemy(true);
+                        Enemy enemy = new Enemy(currentWorld, currentWorld.getWorldTiles()[row][col], GroupedTileSet.getRandomEnemySprite());
+                        currentWorld.enemies.add(enemy);
+                        currentWorld.getWorldTiles()[row][col].setTileID(GroupedTileSet.getRandomGroundTile());
+                        currentWorld.getWorldTiles()[row][col].setEnemy(enemy);
                         currentWorld.getWorldTiles()[row][col].setPassable(false);
                     }
                 }

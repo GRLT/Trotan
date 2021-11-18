@@ -1,14 +1,16 @@
-package game;
+package world;
+
+import entity.Enemy;
+import entity.Player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class World {
     private final Tile[][] worldTiles;
     private final int col;
     private final int row;
     public Player player;
+    ArrayList<Enemy> enemies = new ArrayList<>();
 
     public World(int width, int height) throws Exception {
         this.worldTiles = new Tile[width][height];
@@ -38,10 +40,14 @@ public class World {
     public void emptyWorldGen() {
         for (int row = 0; row < col; row++) {
             for (int col = 0; col < this.row; col++) {
-                Tile tile = new Tile(row, col, false, false, 0, true);
+                Tile tile = new Tile(row, col, null, false, 0, true);
                 worldTiles[col][row] = tile;
             }
         }
+    }
+
+    public Tile[][] getNeighborTiles(Tile tile) {
+        return getNeighborTiles(tile.getY(), tile.getX());
     }
 
     public Tile[][] getNeighborTiles(int tileX, int tileY) {
@@ -51,7 +57,7 @@ public class World {
             for (int j = 0; j < 3; j++) {
                 try {
                     if (i != 1 || j != 1) {
-                        neighborTiles[i][j] = worldTiles[tileX + (i-1)][tileY + (j-1)];
+                        neighborTiles[i][j] = worldTiles[tileX + (i - 1)][tileY + (j - 1)];
                     }
                 } catch (Exception ignored) {
                 }
