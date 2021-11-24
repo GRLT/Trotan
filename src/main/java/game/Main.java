@@ -1,6 +1,8 @@
 package game;
 
 import entity.Enemy;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -12,7 +14,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import util.TileSetReader;
+import util.Util;
 import world.Tile;
 import world.World;
 import world.WorldGenerator;
@@ -43,8 +47,16 @@ public class Main extends Application {
 
             world.emptyWorldGen();
 
+            Timeline twoSecondTimer = new Timeline(
+                    new KeyFrame(Duration.seconds(2),
+                            event -> moveEnemies()));
+            twoSecondTimer.setCycleCount(Timeline.INDEFINITE);
+
+
             WorldGenerator worldGenerator = new WorldGenerator(world, "world_data.txt");
             worldGenerator.convertCharsToTiles();
+
+            twoSecondTimer.play();
 
             BorderPane borderPane = new BorderPane();
             GridPane container = new GridPane();
@@ -159,6 +171,25 @@ public class Main extends Application {
             j++;
         }
     }
+
+    private void moveEnemies() {
+
+
+        for (Enemy enemy : world.getEnemies()) {
+
+            if (enemy != null && !enemy.isAlive()) {
+                world.removeEnemyFromList(enemy);
+                continue;
+            }
+            if (enemy != null) {
+                int randomX = Util.randomIntBetweenRange(-1, 1);
+                int randomY = Util.randomIntBetweenRange(-1, 1);
+                enemy.move(randomX, randomY);
+            }
+        }
+        refreshScreen();
+    }
+
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {

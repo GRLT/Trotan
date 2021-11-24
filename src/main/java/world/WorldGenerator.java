@@ -50,7 +50,7 @@ public class WorldGenerator {
                     }
                     case 'e' -> {
                         Enemy enemy = new Enemy(currentWorld, currentWorld.getWorldTiles()[row][col], GroupedTileSet.getRandomEnemySprite());
-                        currentWorld.enemies.add(enemy);
+                        currentWorld.getEnemies().add(enemy);
                         currentWorld.getWorldTiles()[row][col].setTileID(GroupedTileSet.getRandomGroundTile());
                         currentWorld.getWorldTiles()[row][col].setEnemy(enemy);
                         currentWorld.getWorldTiles()[row][col].setPassable(false);

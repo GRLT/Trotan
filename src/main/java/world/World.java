@@ -10,7 +10,12 @@ public class World {
     private final int col;
     private final int row;
     public Player player;
-    ArrayList<Enemy> enemies = new ArrayList<>();
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    private ArrayList<Enemy> enemies = new ArrayList<>();
 
     public World(int width, int height) throws Exception {
         this.worldTiles = new Tile[width][height];
@@ -66,5 +71,8 @@ public class World {
         return neighborTiles;
     }
 
+    public void removeEnemyFromList(Enemy enemy){
+        enemies.set(enemies.indexOf(enemy),null);
+    }
 
 }

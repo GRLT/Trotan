@@ -56,6 +56,25 @@ public class Enemy extends Entity {
 
     @Override
     public void move(int x, int y) {
+        Tile[][] neighborTiles = world.getNeighborTiles(currentTile.getY(), currentTile.getX());
+        int neighbourY = 0;
+        int neighbourX = 0;
+        switch (y) {
+            case 0 -> neighbourY = 1;
+            case -1 -> neighbourY = 2;
+        }
+        switch (x) {
+            case 0 -> neighbourX = 1;
+            case 1 -> neighbourX = neighborTiles[neighbourY].length - 1;
+        }
+        Tile neighbourToCheck = neighborTiles[neighbourY][neighbourX];
+        if (neighbourToCheck != null && neighbourToCheck.isPassable() && !neighbourToCheck.isHasPlayer()) {
+            currentTile.setEnemy(null);
+            currentTile.setPassable(true);
+            neighbourToCheck.setEnemy(this);
+            currentTile = neighbourToCheck;
+        }
+
 
     }
 

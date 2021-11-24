@@ -11,6 +11,11 @@ public abstract class Entity {
     protected int maxHealth;
     protected int damage;
     protected int armor;
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
     protected boolean isAlive = true;
 
     public Entity(World world) {
